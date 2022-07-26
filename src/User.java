@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class User
@@ -75,18 +76,12 @@ public class User
 				}
 		}
 
-		public void getTextInfoAboutUser()
-		{
-				System.out.println("ID: " + this.idUsers + "; Name: " + this.firstName + "; Last name: " + this.lastName +
-												"; Amount of money: " + this.amountOfMoney);
-		}
-
 		public void getTextListOfPurchases()
 		{
 				if(this.userPurchases.size() > 0)
 				{
 						for (Product element: userPurchases)
-								element.getTextInfoAboutProduct();
+								System.out.println(element.toString());
 				}
 				else
 				{
@@ -124,28 +119,15 @@ public class User
 
 		public void setAmountOfMoney()
 		{
-				Scanner sc = new Scanner(System.in);
-				int num;
-				do {
-						System.out.print("Enter amount of money: ");
-						while (!sc.hasNextInt()) {
-								System.out.println("That not a number! Try again");
-								sc.next();
-						}
-						num = sc.nextInt();
-				} while (!(num >= 0) & !(num < 0));
-			 this.amountOfMoney = num;
+				System.out.print("Enter amount of money: ");
+			 this.amountOfMoney = Marketplace.getCorrectValue();
 		}
-
-	public int getID()
-	{
-			return this.idUsers;
-	}
-
-	public int getAmountOfMoney()
-	{
-			return this.amountOfMoney;
-	}
-
-
+		public int getID() {return this.idUsers;}
+		public int getAmountOfMoney() {return this.amountOfMoney;}
+		@Override
+		public String toString()
+		{
+				return "ID: " + this.idUsers + "; Name: " + this.firstName + "; Last name: " + this.lastName +
+												"; Amount of money: " + this.amountOfMoney;
+		}
 }

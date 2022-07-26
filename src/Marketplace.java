@@ -8,26 +8,16 @@ public class Marketplace
 		private static ArrayList<Product> lisfOfProducts = new ArrayList<>();
 		public static void main(String[] args)
 		{
-				Scanner console = new Scanner(System.in);
 				System.out.println("Welcome to marketplace v0.1!\n");
 				int value = 0;
 
 				do
 				{
 						textMenu();
-						do {
-								while (!console.hasNextInt()) {
-										System.out.println("That not a number! Try again");
-										console.next();
-								}
-								value = console.nextInt();
-						} while (!(value >= 0) & !(value < 0));
-
+						value = getCorrectValue();
 						workOut(value);
-
 						System.out.println();
 				} while(value != 9);
-
 		}
 
 		private static void workOut(int num)
@@ -84,7 +74,7 @@ public class Marketplace
 								if(lisfOfUsers.size() > 0)
 								{
 										for(User element: lisfOfUsers)
-												element.getTextInfoAboutUser();
+												System.out.println(element.toString());
 								}
 								else
 								{
@@ -97,7 +87,7 @@ public class Marketplace
 								if(lisfOfProducts.size() > 0)
 								{
 										for(Product element: lisfOfProducts)
-												element.getTextInfoAboutProduct();
+												System.out.println(element.toString());
 								}
 								else
 								{
@@ -185,7 +175,6 @@ public class Marketplace
 								break;
 				}
 		}
-
 		private static void textMenu()
 		{
 				System.out.println("Click 1: To add a user");
@@ -198,6 +187,27 @@ public class Marketplace
 				System.out.println("Click 8: Show the list of user's purchases");
 				System.out.println("Click 9: Exit the program");
 				System.out.print("Your answer: ");
+		}
+		public static int getCorrectValue()
+		{
+				Scanner console = new Scanner(System.in);
+				int a;
+				while(true)
+				{
+						try
+						{
+								a = console.nextInt();
+								if(a > 0) break;
+								System.out.println("The number must be greater than 0");
+						}
+						catch (InputMismatchException e)
+						{
+								e.printStackTrace();
+								System.out.println("You inputted not a number! Try again");
+								console.next();
+						}
+				}
+				return a;
 		}
 
 

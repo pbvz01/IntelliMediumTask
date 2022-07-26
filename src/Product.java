@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Product
@@ -26,12 +27,12 @@ public class Product
 		public static void deleteProduct(ArrayList<Product> list, int ID)
 		{
 				int size = list.size();
-				if(size < 1) System.out.println("The list of product is empty");
+				if (size < 1) System.out.println("The list of product is empty");
 				else
 				{
 						for (int i = 0; i < list.size(); i++)
 						{
-								if(list.get(i).getID() == ID)
+								if (list.get(i).getID() == ID)
 								{
 										System.out.println("Delete was comlite!");
 										list.remove(i);
@@ -39,18 +40,13 @@ public class Product
 										break;
 								}
 						}
-						if(list.size() == size) System.out.println("ID not found");
+						if (list.size() == size) System.out.println("ID not found");
 				}
-		}
-
-		public void getTextInfoAboutProduct()
-		{
-				System.out.println("ID: " + this.idProduct + "; Product: " + this.productName + "; Price: " + this.price);
 		}
 
 		public int getID()
 		{
-			return this.idProduct;
+				return this.idProduct;
 		}
 
 		public int getPrice()
@@ -74,16 +70,12 @@ public class Product
 
 		public void setPrice()
 		{
-				Scanner sc = new Scanner(System.in);
-				int num;
-				do {
-						System.out.print("Enter the price of product: ");
-						while (!sc.hasNextInt()) {
-								System.out.println("That not a number! Try again");
-								sc.next();
-						}
-						num = sc.nextInt();
-				} while (!(num >= 0) & !(num < 0));
-				this.price = num;
+				System.out.print("Enter the price: ");
+				this.price = Marketplace.getCorrectValue();
+		}
+		@Override
+		public String toString()
+		{
+				return "ID: " + this.idProduct + "; Product: " + this.productName + "; Price: " + this.price;
 		}
 }
